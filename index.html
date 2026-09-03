@@ -86,8 +86,16 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 1.1rem; /* 👉 統一 Tip Box 的基礎字體大小 */
+            line-height: 1.6;
         }
         .tip-box strong { color: #7B2832; font-size: 1.3rem; }
+        
+        /* 👉 新增這行：強迫 Tip Box 裡面的列點(li)或段落(p)乖乖聽話，不要變太大 */
+        .tip-box li, .tip-box p { 
+            font-size: 1.1rem; 
+            margin-bottom: 8px; /* 讓列點之間稍微留點空隙，比較好閱讀 */
+        }
 
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .tool-card { background-color: white; padding: 20px; border-radius: 10px; border-top: 4px solid #A84955; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
@@ -196,17 +204,19 @@
             font-size: 1.8rem; /* 漢堡圖示大小 */
         }
         /* 當螢幕寬度小於 768px (手機) 時觸發 */
+        /* 當螢幕寬度小於 768px (手機) 時觸發 */
         @media (max-width: 768px) {
             .menu-toggle { display: block; } /* 手機版顯示漢堡按鈕 */
             .sidebar {
                 position: fixed;
-                left: -260px; /* 預設隱藏在螢幕左外側 */
+                left: 0;
+                transform: translateX(-110%); /* 👉 直接往左推移自己寬度的 110%，保證完全消失在螢幕外！ */
                 z-index: 1000;
                 height: 100%;
-                transition: 0.4s ease; /* 滑動動畫 */
+                transition: transform 0.4s ease; /* 滑動動畫 */
             }
             .sidebar.open {
-                left: 0; /* 點擊後滑出 */
+                transform: translateX(0); /* 點擊後順暢地滑回原位 */
                 box-shadow: 5px 0 15px rgba(0,0,0,0.2);
             }
             .content {
@@ -242,21 +252,24 @@
         
         <!-- 【首頁區塊】 -->
         <div id="home" class="section active">
-            <h1>小蓮老師的簡易科技手冊 🎁</h1>
+            <h1>小蓮老師的超級秘笈 🎁</h1>
             
             <div class="welcome-card">
                 <div class="greeting">親愛的小蓮老師，您好！</div>
                 <p>很高興能有這個機會，製作網頁向您簡易說明Canva軟體的操作及AI的使用。</p>
                 <p>面對日新月異的 AI 工具和設計軟體，您只要把 AI 想像成一個<b>「剛畢業的熱血助理」</b>，充滿熱情但需要給予適當指令才能得到期望的結果；把 Canva 想像成一個<b>「幫您準備好半成品的設計百寶箱」</b>，能夠快速套用模板省去設計時間，使用起來簡簡單單！</p>
-                <p>這份網頁手冊本身，就是我與 AI 合作出來的作品噢！程式碼外的文字幾乎都是Gemini的作品。您可以隨時透過<b>點擊左側的目錄</b>，查看不同主題的教學。</p>
+                <p>這份網頁手冊本身，就是我與 AI 合作出來的作品噢！程式碼外的文字幾乎都是Gemini的作品。您可以隨時透過<b>點擊左側的目錄</b>（手機版點擊右下角漢堡選單展開目錄），查看不同主題的教學。</p>
                 <p>請放心地探索這份手冊，有任何問題，歡迎聯絡我或點擊左側目錄的<b>「許願池與回饋」</b>欄位留下任何疑問！我也會盡快回覆或更新網頁。</p>
+                <p>老師加油！！非常愛尼！！</p>
                 <div class="signature">悅寧 敬上</div>
             </div>
             <h2 style="color: #923440; font-size: 1.6rem; margin-top: 30px;">📌 如何使用這份手冊？</h2>
             <ul>
-                <li>👈 <b>點擊左邊的選單：</b>可以隨時切換到您想看的單元。</li>
+                <li>👈 <b>電腦版本點擊左邊的選單：</b>可以隨時切換到您想看的單元。</li>
+                <li>↘️ <b>手機版本點擊右下漢堡選單：</b>展開目錄切換分頁。</li>
                 <li>🔽 <b>點擊標題展開：</b>教學內容採用摺疊設計，點擊標題就能展開詳細內容。</li>
                 <li>💡 <b>直接複製貼上：</b>在「AI Prompt 技巧」區，有很多AI為您寫好的「魔法指令」，可以直接複製貼上參考使用喔！</li>
+                <li>📬 <b> 許願池與回饋：</b>歡迎在目錄最下方的「許願池」欄位留下/或直接告訴我疑問或希望更新的內容，我會速速新增！</li>
             </ul>
         </div>
 
@@ -289,7 +302,7 @@
             <button class="accordion">二、 A4文件/其他格式非簡報文件</button>
             <div class="panel">
                 <div class="panel-content">
-                    <p>我最喜歡的功能！也是我的備審資料產出的地方。最適合生成履歷、NOPQ或三折頁！！因此下方以製作備審資料舉例</p>
+                    <p>我最喜歡的功能！也是我的備審資料產出的地方。最適合生成履歷、NOPQ或三折頁！因此下方以製作備審資料舉例。</p>
                     <div class="tip-box">
                         <strong>💡 備審資料的「A4 畫布」設定</strong><br>
                         若要建立固定長寬比文件（以A4為例），在建立設計時，務必搜尋「<b>A4 文件</b>」或是「<b>履歷</b>」，這樣印出來或存成 PDF，比例才會正確。
@@ -307,12 +320,56 @@
                     <img src="2.png" alt="Canva備審資料排版示範" class="content-img">
                 </div>
             </div>
-            <!-- 新增的折疊區塊三：加入元素與鑲嵌 -->
-            <button class="accordion">三、 豐富設計：加入元素與嵌入外部檔案</button>
+            <!-- 新增的折疊區塊三：基礎設計 -->
+            <button class="accordion">三、 基礎設計操作</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>本區塊是Canva的基礎操作，涵蓋調大小、粗細、顏色...等，最後也有字體推薦可以參考。</p>
+                    <p>點擊一下可選定文字，點擊兩下（游標閃爍後）則可編輯文字內容。</p>
+                    <img src="截圖 2026-09-03 晚上10.59.57.png" alt="Canva基礎操作" class="content-img">
+                    <p><b>上方工具列</b>會是您的超級好朋友，無論換字體還是大小、粗細，和文字相關的資訊都能在上方找到，下圖為詳細圖例（螢光部分是常用選項）。</p>
+                    <img src="截圖 2026-09-03 晚上11.00.18.png" alt="Canva工具列" class="content-img">
+                    
+                    <h3 style="color: #7B2832; margin-top: 15px;">🖱️ 1. 移動與調整大小</h3>
+                    <ul>
+                        <li><b>移動位置：</b>滑鼠點擊一下您想移動的文字或圖片，<strong>按住滑鼠左鍵不放</strong>，就可以把它拖曳到畫面的任何地方。</li>
+                        <li><b>放大縮小：</b>點擊文字或圖片後，它的四周會出現紫色的外框和<strong>「四個白色小圓點」</strong>。只要按住角落的白色小圓點，往外拉就是放大，往內縮就是縮小！（💡小提醒：縮放請務必拉「角落」的圓點，如果拉四邊的圓點在Canva中是裁切的功能！）</li>
+                        <li><b>復原上一步：</b>如果不小心改錯了，只要按鍵盤上的 <code>Ctrl + Z</code>（Mac 是 <code>Cmd + Z</code>），或是點擊畫面最左上角的「左彎箭頭 ↩️」，就能Undo！</li>
+                    </ul>
+
+                    <h3 style="color: #7B2832; margin-top: 20px;">🔤 2. 更改字體與推薦字型</h3>
+                    <p>點擊畫面上的任何一段文字後，網頁<strong>最上方會出現一排「白色工具列」</strong>。點擊最左邊顯示字體名稱的框框，左側就會滑出字體清單。</p>
+                    
+                    <div class="tip-box">
+                        <strong>💡 我的推薦字體</strong>
+                        <p>在搜尋列輸入或限定「繁體中文」，即可找到相容且適合各種場合的字體。</p>
+                        <p><b>注意：由於有些是日語字體，若字體不相容，可嘗試輸入異體字（如：裡➡️裏、啓➡️啟）</b>。</p>
+                        <ul>
+                            <li><b>適合做「大標題」：</b><br>
+                                🔍 搜尋 <strong> 王漢宗特黑體</strong>：字體較粗，但偶爾略顯笨重。<br>
+                                🔍 搜尋 <strong>思源黑體 (Noto Sans TC)</strong>：最標準且好閱讀的字體，放在簡報上絕對不會出錯。<br>
+                                🔍 搜尋 <strong>Canva Sans</strong>：與思源黑體類似，適合當大標題或正式的場合（做小字也沒問題）。
+                            </li>
+                            <li><b>適合做「長篇內文」：</b><br>
+                                🔍 搜尋 <strong>芫荽</strong>：香菜體，可愛風格但易閱讀<br>
+                                🔍 搜尋 <strong>zen角ゴシック new</strong>：長篇文字必備，較為正式且清楚。
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 style="color: #7B2832; margin-top: 20px;">🎨 3. 更改顏色</h3>
+                    <ul>
+                        <li>點擊文字後，上方工具列會有一個底下有彩虹條的<strong>「A」</strong>圖示，點下去就能換字體顏色。</li>
+                        <li>點擊圖案後，上方工具列會出現對應的<strong>「顏色色塊」</strong>，點擊色塊就能換成您喜歡的顏色。Canva 還可以自上傳的照片中「自動抓取相近色」供您挑選，讓畫面色調一致。</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 四：加入元素與鑲嵌 -->
+            <button class="accordion">四、 豐富設計：加入元素與嵌入外部檔案</button>
             <div class="panel">
                 <div class="panel-content">
                     <p>讓您的簡報或備審資料更生動，您可以使用 Canva 內建的「元素」，或是把其他網站的內容、以前做的簡報直接「嵌入」進來！</p>
-                    <p>別忘了學校帳號登入有提供教育版！！可以免費使用會員啦（差非！常！多！）</p>
+                    <p>別忘了學校帳號登入有提供教育版，可以免費使用會員啦！（114.08.20已協助設定好）</p>
                     
                     <h3 style="color: #7B2832; margin-top: 15px;">✨ 1. 加入圖示、線條與貼圖（元素功能）</h3>
                     <ul>
@@ -320,18 +377,36 @@
                         <li><b>精準搜尋：</b>在搜尋框輸入關鍵字（例如：箭頭、書本、驚嘆號...）。</li>
                         <li><b>拖曳使用：</b>看到喜歡的圖案，直接用滑鼠點擊或拖曳到畫布上。大部分的圖示點擊後，還可以在左上角自由更改顏色！</li>
                     </ul>
-                    <img src="ㄅ.png" alt="Canva元素操作示範" class="content-img">
+                    <img src="截圖 2026-09-03 晚上11.07.12.png" alt="Canva元素操作示範" class="content-img">
+                    <div class="tip-box">
+                        <strong>💡 小提醒：元素種類</strong><br>
+                        元素包含各種貼圖、插畫、圖片等等，每個種類都有自己的屬性，詳細如下。
+                        <ul>
+                            <li><b>圖像：</b>即貼紙，最普遍使用到的元素、自由度最高，部分可以改成自己喜歡的顏色（於螢幕上方編輯籃的彩色圓圈）。<b>極度推薦創作者Irasutoya的貼紙！</b>讓版面一致更舒服。</li>
+                            <li><b>照片：</b>不經常使用，建議自行上傳（左側雲朵圖案上傳）或網頁查找圖片（善用<b>複製</b>功能就不用刪檔案啦！）。</li>
+                            <li><b>視訊：</b>即影片，較少用到，注意若輸出PDF影片則無法播放。</li>
+                        </ul>
+                    </div>
 
-                    <h3 style="color: #7B2832; margin-top: 20px;">🔗 2. 鑲嵌（嵌入）外部文件或影音</h3>
+                    <h3 style="color: #7B2832; margin-top: 20px;">🔗 2. 鑲嵌（嵌入）外部文件或影音（#較進階可以不用學）</h3>
                     <p>想在簡報裡直接播放 YouTube 影片，或是放入 Google 表單，不用跳轉網頁，可以直接「鑲嵌」進來：</p>
                     <ul>
-                        <li><b>超快速貼上法：</b>去 YouTube 或 Google 表單複製該網址，回到 Canva 畫布上，直接按鍵盤的 <code>Ctrl + V</code>（Mac 為 <code>Cmd + V</code>）貼上。Canva 會自動施展魔法，把它變成一個可以互動的預覽方塊！</li>
+                        <li><b>快速貼上法：</b>去 YouTube 或 Google 表單複製該網址，回到 Canva 畫布上，直接按鍵盤的 <code>Ctrl + V</code>（Mac 為 <code>Cmd + V</code>）貼上。Canva 會把它變成一個可以互動的預覽方塊。</li>
                         <li><b>正規嵌入法：</b>在左側邊欄滑到最下面點擊<strong>「應用程式」</strong>，搜尋<strong>「嵌入 (Embed)」</strong>。點擊後把網址貼進去，按下「新增至設計」即可。</li>
                     </ul>
                     <div class="tip-box">
                         <strong>💡 小提醒：預覽模式</strong><br>
                         鑲嵌進來的影片或表單，在您「編輯」的時候可能無法直接點擊互動（會變成調整大小）。但只要您點擊右上角的「呈現（播放簡報）」，它就會變成可以真實播放、填寫的元件喔！
                     </div>
+
+                    <h3 style="color: #7B2832; margin-top: 20px;">🔗 3. 建立超連結（讓文字或圖片變成任意門）</h3>
+                    <p>如果您想在簡報放上相關影片，或是表單、網址，可以把文字或圖片變成「點了就會跑出網頁」的超連結喔！</p>
+                    <ul>
+                        <li><b>選取目標：</b>先點擊您想要加上連結的「文字」或「圖案」。</li>
+                        <li><b>加上連結：</b>點擊滑鼠右鍵，選擇<strong>「連結」</strong>（圖示長得像兩個鐵環扣在一起），或者直接使用鍵盤快捷鍵 <code>Ctrl + K</code>（Mac 為 <code>Cmd + K</code>）。</li>
+                        <img src="截圖 2026-09-03 晚上11.18.48.png" alt="Canva超連結" class="content-img">
+                        <li><b>貼上網址：</b>在跳出來的框框裡，把您想連過去的網址貼上並按下 <code>Enter</code> 鍵。未來只要將檔案下載成 PDF，或是在「呈現」模式播放時，讀者一點就會自動跳轉囉！</li>
+                    </ul>
                 </div>
             </div>
         </div>
